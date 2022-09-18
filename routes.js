@@ -4,12 +4,28 @@ import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import BubbleChart from '@material-ui/icons/BubbleChart';
 import LocationOn from '@material-ui/icons/LocationOn';
 import Notifications from '@material-ui/icons/Notifications';
+import LocalAtmIcon from '@material-ui/icons/LocalAtm';
+import ListAlt from '@material-ui/icons/ListAlt';
 
 const dashboardRoutes = [
   {
     path: '/dashboard',
     name: 'Home',
     icon: Dashboard,
+
+    layout: '/admin'
+  },
+  {
+    path: '/quadro-manutencoes',
+    name: 'Quadro de manutenções',
+    icon: ListAlt,
+
+    layout: '/admin'
+  },
+  {
+    path: '/gastos-viatura',
+    name: 'Gastos da Viatura',
+    icon: LocalAtmIcon,
 
     layout: '/admin'
   },

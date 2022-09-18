@@ -1,57 +1,71 @@
 /*eslint-disable*/
-import React from "react";
+import React, { useEffect } from 'react';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import Hidden from "@material-ui/core/Hidden";
+import { makeStyles } from '@material-ui/core/styles';
+import Hidden from '@material-ui/core/Hidden';
 // layout for this page
-import Admin from "layouts/Admin.js";
+import Admin from 'layouts/Admin.js';
 // core components
-import GridItem from "components/Grid/GridItem.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import Card from "components/Card/Card.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardBody from "components/Card/CardBody.js";
+import GridItem from 'components/Grid/GridItem.js';
+import GridContainer from 'components/Grid/GridContainer.js';
+import Card from 'components/Card/Card.js';
+import CardHeader from 'components/Card/CardHeader.js';
+import CardBody from 'components/Card/CardBody.js';
 
-import styles from "assets/jss/nextjs-material-dashboard/views/iconsStyle.js";
+import styles from 'assets/jss/nextjs-material-dashboard/views/iconsStyle.js';
+import { Button } from '@material-ui/core';
+import buscaPrefixoOuPlaca from 'hooks/buscaPrefixoOuPlaca';
 
 function Icons() {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
+  const { loading, data, buscar } = buscaPrefixoOuPlaca();
+
+  const buscarDados = (event) => {
+    buscar('553987');
+
+    console.log(data);
+  };
+
   return (
     <GridContainer>
+      {console.log(loading ?? 'lendo...')}
+      {console.log(data.length !== 0 ? data[0] : 'vazio')}
       <GridItem xs={12} sm={12} md={12}>
         <Card plain>
-          <CardHeader plain color="primary">
+          <CardHeader plain color='primary'>
             <h4 className={classes.cardTitleWhite}>Material Design Icons</h4>
             <p className={classes.cardCategoryWhite}>
-              Handcrafted by our friends from{" "}
+              Handcrafted by our friends from{' '}
               <a
-                href="https://design.google.com/icons/?ref=creativetime"
-                target="_blank"
+                href='https://design.google.com/icons/?ref=creativetime'
+                target='_blank'
               >
                 Google
               </a>
             </p>
           </CardHeader>
           <CardBody>
-            <Hidden only={["sm", "xs"]}>
+            <Button onClick={(e) => buscarDados(e)}>click me!</Button>
+
+            <Hidden only={['sm', 'xs']}>
               <iframe
                 className={classes.iframe}
-                src="https://material.io/icons/"
-                title="Icons iframe"
+                src='https://material.io/icons/'
+                title='Icons iframe'
               >
                 <p>Your browser does not support iframes.</p>
               </iframe>
             </Hidden>
-            <Hidden only={["lg", "md"]}>
+            <Hidden only={['lg', 'md']}>
               <GridItem xs={12} sm={12} md={6}>
                 <h5>
                   The icons are visible on Desktop mode inside an iframe. Since
                   the iframe is not working on Mobile and Tablets please visit
                   the icons on their original page on Google. Check the
                   <a
-                    href="https://design.google.com/icons/?ref=creativetime"
-                    target="_blank"
+                    href='https://design.google.com/icons/?ref=creativetime'
+                    target='_blank'
                   >
                     Material Icons
                   </a>

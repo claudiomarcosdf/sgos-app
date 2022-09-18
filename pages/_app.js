@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from 'next/app';
 import Head from 'next/head';
 import Router from 'next/router';
+import { ToastProvider } from 'react-toast-notifications';
 
 import PageChange from 'components/PageChange/PageChange.js';
 
@@ -56,9 +57,11 @@ export default class MyApp extends App {
           <title>CMan - Centro de Manutenção</title>
           <script src='https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE'></script>
         </Head>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <ToastProvider autoDismiss={true} autoDismissTimeout='4000'>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ToastProvider>
       </React.Fragment>
     );
   }
