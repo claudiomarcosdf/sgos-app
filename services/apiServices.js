@@ -17,4 +17,14 @@ async function getGastosPorPrefixoOuPlaca(prefixoOuPlaca) {
   return response;
 }
 
-export { getGastosPorPrefixoOuPlaca };
+async function getViaturasEmManutencao(ano) {
+  const response = await axios.get(`${API_URL}/ordemservico/viaturasEmManutencao/${ano}`)
+
+  if (response.status !== 200) {
+    throw Error(response.Error);
+  }
+
+  return response;
+}
+
+export { getGastosPorPrefixoOuPlaca, getViaturasEmManutencao };

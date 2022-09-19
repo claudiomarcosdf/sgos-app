@@ -56,10 +56,18 @@ function groupBy(array, key) {
   }, {});
 }
 
+function formatModelo(modelo) {
+
+  const modelo1 =  modelo.split(' ', 3);
+  const modeloFinal = modelo1.join(' ');
+  return modelo ? modeloFinal : ''
+}
+
 export {
   formatCurrency,
   formatDateBr,
   convertDisplay,
   formatPrefixoOuPlaca,
-  groupBy
+  groupBy,
+  formatModelo
 };

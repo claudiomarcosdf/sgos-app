@@ -10,8 +10,10 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableFooter,
   TableHead,
+  TablePagination,
   TableRow
 } from '@material-ui/core';
 
@@ -24,9 +26,10 @@ const styles = {
       opacity: 1,
       fontSize: '1em',
       fontWeight: 300,
-      width: '60px',
-      height: '80px',
-      transform: 'rotate(-90deg)'
+      minWidth: '5px',
+      height: '5px',
+      transform: 'rotate(-90deg)',
+      whiteSpace: 'nowrap'
     }
   },
   footer: {
@@ -66,58 +69,58 @@ const styles = {
   }
 };
 
-const columns = [
-  { modelo: '', align: 'center' },
-  { modelo: 'ASX' },
-  { modelo: 'JOURNEY' },
-  { modelo: 'COROLLA' },
-  { modelo: 'PAJERO' },
-  { modelo: 'ETIOS' },
-  { modelo: 'KWID' }
-];
+// const columns = [
+//   { modelo: '', align: 'center' },
+//   { modelo: 'ASX' },
+//   { modelo: 'JOURNEY' },
+//   { modelo: 'COROLLA' },
+//   { modelo: 'PAJERO' },
+//   { modelo: 'ETIOS' },
+//   { modelo: 'KWID' }
+// ];
 
-const rows = [
-  {
-    unidade: '1º BPM',
-    modelo: 'ASX',
-    total: 3
-  },
-  {
-    unidade: '1º BPM',
-    modelo: 'JOURNEY',
-    total: 7
-  },
-  {
-    unidade: '1º BPM',
-    modelo: 'COROLLA',
-    total: 10
-  },
-  {
-    unidade: '1º BPM',
-    modelo: 'PAJERO',
-    total: 1
-  },
-  {
-    unidade: '8º BPM',
-    modelo: 'ASX',
-    total: 1
-  },
-  {
-    unidade: '8º BPM',
-    modelo: 'JOURNEY',
-    total: 13
-  },
-  {
-    unidade: '8º BPM',
-    modelo: 'COROLLA',
-    total: 5
-  }
-];
+// const rows = [
+//   {
+//     unidade: '1º BPM',
+//     modelo: 'ASX',
+//     total: 3
+//   },
+//   {
+//     unidade: '1º BPM',
+//     modelo: 'JOURNEY',
+//     total: 7
+//   },
+//   {
+//     unidade: '1º BPM',
+//     modelo: 'COROLLA',
+//     total: 10
+//   },
+//   {
+//     unidade: '1º BPM',
+//     modelo: 'PAJERO',
+//     total: 1
+//   },
+//   {
+//     unidade: '8º BPM',
+//     modelo: 'ASX',
+//     total: 1
+//   },
+//   {
+//     unidade: '8º BPM',
+//     modelo: 'JOURNEY',
+//     total: 13
+//   },
+//   {
+//     unidade: '8º BPM',
+//     modelo: 'COROLLA',
+//     total: 5
+//   }
+// ];
 
-const resultado = groupBy(rows, 'unidade');
-const withNestedKeys = Object.entries(resultado).map((entry) => {
-  return { [entry[0]]: entry[1] };
-});
+// const resultado = groupBy(rows, 'unidade');
+// const withNestedKeys = Object.entries(resultado).map((entry) => {
+//   return { [entry[0]]: entry[1] };
+// });
 
 /*
   [
@@ -130,15 +133,51 @@ const withNestedKeys = Object.entries(resultado).map((entry) => {
 
 //console.log(withNestedKeys);
 
+const cabecalhoVazio = [1,2,3,4]
+
 function TabelaManutencoes(props) {
+  const { rows, columns } = props;
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(9);  
   const useStyles = makeStyles(styles);
   const classes = useStyles();
 
-  //const { rows } = props;
+  const resultado = groupBy(rows, 'unidade');
+  const withNestedKeys = Object.entries(resultado).map((entry) => {
+    return { [entry[0]]: entry[1] };
+  }); 
 
+  //para os totais
+  const rangers = {
+    medium: 5,
+    righ: 7
+  }
+  
+  function handleChangePage (event, newPage) {
+    setPage(newPage);
+  };
+
+  function handleChangeRowsPerPage (event) {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };  
+
+  function celulaPersonalizada (total) {
+
+    const styleMedium = { backgroundColor: '#d2f8d2', color: '#006266', padding: '1px 6px', borderRadius:'3px'};
+    const styleRigh = { backgroundColor: '#fab1a0', color: '#EA2027', padding: '1px 6px', borderRadius:'3px'};
+
+    const style = total == rangers.medium ? styleMedium : total >= rangers.righ ? styleRigh : false;
+
+
+    return (<span style={{...style}}>{total}</span>)
+  }
+
+  //Monta linha com o array da unidade
   function retornaCelulasDaLinha(row) {
     const arrayOfUnidade = row[Object.keys(row)];
-    console.log(arrayOfUnidade);
+    //console.log(arrayOfUnidade);
 
     const arrayOfCels = [];
 
@@ -153,8 +192,10 @@ function TabelaManutencoes(props) {
           <TableCell
             key={i}
             align={columns[i]?.align ? columns[i]?.align : 'center'}
+            
           >
-            {encontrouModelo.total}
+            {celulaPersonalizada(encontrouModelo.total)}
+            
           </TableCell>
         );
       } else {
@@ -184,11 +225,21 @@ function TabelaManutencoes(props) {
           </p>
         </CardHeader>
         <CardBody>
-          <Table>
-            <TableHead>
+          <TableContainer>
+          <Table >
+            <TableHead >              
+
+                {cabecalhoVazio.map(item => { //Apenas para ajustar o cabeçalho da tabela
+                  return (              
+                    <TableRow>
+                      <TableCell colSpan={columns.length} style={{border: 0}}></TableCell>
+                    </TableRow>
+                  )
+                })}
+                                        
               <TableRow className={classes.root}>
                 {columns.map((column, i) => (
-                  <TableCell
+                  <TableCell style={{ maxWidth: "5px"}}
                     key={i}
                     align={column?.align ? column?.align : 'center'}
                   >
@@ -198,24 +249,27 @@ function TabelaManutencoes(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {withNestedKeys.map((row, i) => {
+              {withNestedKeys.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, i) => {
                 return (
                   <TableRow hover key={i}>
-                    <TableCell>{Object.keys(row)}</TableCell>
+                    <TableCell style={{ minWidth: '65px' }}>{Object.keys(row)}</TableCell>
 
                     {retornaCelulasDaLinha(row)}
                   </TableRow>
                 );
               })}
             </TableBody>
-            <TableFooter className={classes.footer}>
-              <TableRow>
-                <TableCell align='right' colSpan={8}>
-                  Total geral: 0
-                </TableCell>
-              </TableRow>
-            </TableFooter>
           </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[9, 15, 20]}
+            component="div"
+            count={withNestedKeys.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />          
         </CardBody>
       </Card>
     </>
