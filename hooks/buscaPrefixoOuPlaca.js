@@ -45,7 +45,11 @@ const buscaPrefixoOuPlaca = () => {
       }
     } catch (error) {
       setLoading(false);
-      addToast(error.response.data, { appearance: 'error' });
+      const msg =
+        error.response.status == 500
+          ? 'O Servidor não responde 😕'
+          : error.response.data;
+      addToast(msg, { appearance: 'error' });
       console.log('Erro!!!', error.response.data);
     }
   }

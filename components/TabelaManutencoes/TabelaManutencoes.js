@@ -133,45 +133,73 @@ const styles = {
 
 //console.log(withNestedKeys);
 
-const cabecalhoVazio = [1,2,3,4]
+const cabecalhoVazio = [1, 2, 3, 4];
 
 function TabelaManutencoes(props) {
   const { rows, columns } = props;
 
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(9);  
+  const [rowsPerPage, setRowsPerPage] = React.useState(9);
   const useStyles = makeStyles(styles);
   const classes = useStyles();
 
   const resultado = groupBy(rows, 'unidade');
   const withNestedKeys = Object.entries(resultado).map((entry) => {
     return { [entry[0]]: entry[1] };
-  }); 
+  });
 
-  //para os totais
-  const rangers = {
-    medium: 5,
-    righ: 7
-  }
-  
-  function handleChangePage (event, newPage) {
+  function handleChangePage(event, newPage) {
     setPage(newPage);
-  };
+  }
 
-  function handleChangeRowsPerPage (event) {
+  function handleChangeRowsPerPage(event) {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  };  
+  }
 
-  function celulaPersonalizada (total) {
+  function getStyle(total) {
+    //para os totais
+    const rangers = {
+      lower: 3,
+      medium: 5,
+      righ: 7
+    };
 
-    const styleMedium = { backgroundColor: '#d2f8d2', color: '#006266', padding: '1px 6px', borderRadius:'3px'};
-    const styleRigh = { backgroundColor: '#fab1a0', color: '#EA2027', padding: '1px 6px', borderRadius:'3px'};
+    const styleDefault = {
+      color: '#2f3542'
+    };
+    const styleLower = {
+      backgroundColor: '#d2f8d2',
+      color: '#006266',
+      padding: '1px 6px',
+      borderRadius: '3px'
+    };
+    const styleMedium = {
+      backgroundColor: '#f7d794',
+      color: '#f19066',
+      padding: '1px 6px',
+      borderRadius: '3px'
+    };
+    const styleRigh = {
+      backgroundColor: '#fab1a0',
+      color: '#EA2027',
+      padding: '1px 6px',
+      borderRadius: '3px'
+    };
 
-    const style = total == rangers.medium ? styleMedium : total >= rangers.righ ? styleRigh : false;
+    if (total >= rangers.lower && total < rangers.medium) {
+      return styleLower;
+    } else if (total >= rangers.medium && total < rangers.righ) {
+      return styleMedium;
+    } else if (total >= rangers.righ) {
+      return styleRigh;
+    } else return styleDefault;
+  }
 
+  function celulaPersonalizada(total) {
+    const style = getStyle(total);
 
-    return (<span style={{...style}}>{total}</span>)
+    return <span style={{ ...style }}>{total}</span>;
   }
 
   //Monta linha com o array da unidade
@@ -190,21 +218,19 @@ function TabelaManutencoes(props) {
       if (encontrouModelo) {
         arrayOfCels.push(
           <TableCell
-            key={i}
+            key={i + 'dataline'}
             align={columns[i]?.align ? columns[i]?.align : 'center'}
-            
           >
             {celulaPersonalizada(encontrouModelo.total)}
-            
           </TableCell>
         );
       } else {
         arrayOfCels.push(
           <TableCell
-            key={i}
+            key={i + 'dataline'}
             align={columns[i]?.align ? columns[i]?.align : 'center'}
           >
-            0
+            <span style={{ color: '#a5b1c2' }}>0</span>
           </TableCell>
         );
       }
@@ -226,50 +252,62 @@ function TabelaManutencoes(props) {
         </CardHeader>
         <CardBody>
           <TableContainer>
-          <Table >
-            <TableHead >              
-
-                {cabecalhoVazio.map(item => { //Apenas para ajustar o cabeçalho da tabela
-                  return (              
+            <Table>
+              <TableHead>
+                {cabecalhoVazio.map((item) => {
+                  //Apenas para ajustar o cabeçalho da tabela
+                  return (
                     <TableRow>
-                      <TableCell colSpan={columns.length} style={{border: 0}}></TableCell>
+                      <TableCell
+                        key={item + 'fake'}
+                        colSpan={columns.length}
+                        style={{ border: 0 }}
+                      ></TableCell>
                     </TableRow>
-                  )
+                  );
                 })}
-                                        
-              <TableRow className={classes.root}>
-                {columns.map((column, i) => (
-                  <TableCell style={{ maxWidth: "5px"}}
-                    key={i}
-                    align={column?.align ? column?.align : 'center'}
-                  >
-                    {column.modelo}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {withNestedKeys.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, i) => {
-                return (
-                  <TableRow hover key={i}>
-                    <TableCell style={{ minWidth: '65px' }}>{Object.keys(row)}</TableCell>
 
-                    {retornaCelulasDaLinha(row)}
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
+                <TableRow className={classes.root}>
+                  {columns.map((column, i) => (
+                    <TableCell
+                      style={{ maxWidth: '5px' }}
+                      key={i + column.modelo}
+                      align={column?.align ? column?.align : 'center'}
+                    >
+                      {column.modelo}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {withNestedKeys
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, i) => {
+                    return (
+                      <TableRow hover>
+                        <TableCell //coluna modelo
+                          key={i + 'data'}
+                          style={{ minWidth: '65px', color: '#596275' }}
+                        >
+                          {Object.keys(row)}
+                        </TableCell>
+
+                        {retornaCelulasDaLinha(row)}
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
           </TableContainer>
           <TablePagination
             rowsPerPageOptions={[9, 15, 20]}
-            component="div"
+            component='div'
             count={withNestedKeys.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onChangePage={handleChangePage}
             onChangeRowsPerPage={handleChangeRowsPerPage}
-          />          
+          />
         </CardBody>
       </Card>
     </>

@@ -1,18 +1,30 @@
 import React from 'react';
 
 import Admin from 'layouts/Admin.js';
-import GridItem from 'components/Grid/GridItem.js';
 import GridContainer from 'components/Grid/GridContainer.js';
 import TabelaManutencoes from 'components/TabelaManutencoes/TabelaManutencoes';
 import exibeManutencoesAbertas from 'hooks/exibeManutencoesAbertas';
+import { Box } from '@material-ui/core';
+import ProgressBar from 'components/ProgressBar/ProgressBar';
 
 function QuadroManutencoes() {
-  const { loading, data, headers } = exibeManutencoesAbertas();
+  const { loading, data, erro, headers } = exibeManutencoesAbertas();
 
   return (
     <GridContainer>
-      {data.length > 0 ? <TabelaManutencoes rows={data} columns={headers} /> : false}
-      
+      <span style={{ marginLeft: '30px' }}>{erro}</span>
+      {loading ? (
+        <Box sx={{ width: '100%' }}>
+          <ProgressBar />
+        </Box>
+      ) : (
+        false
+      )}
+      {data.length > 0 ? (
+        <TabelaManutencoes rows={data} columns={headers} />
+      ) : (
+        false
+      )}
     </GridContainer>
   );
 }
