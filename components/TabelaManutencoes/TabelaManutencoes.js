@@ -22,7 +22,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const styles = {
   root: {
     '& .MuiTableCell-head': {
-      color: '#ab47bc', //'#574b90'
+      color: '#1663BE', //'#574b90'
       opacity: 1,
       fontSize: '1em',
       fontWeight: 300,
@@ -34,7 +34,7 @@ const styles = {
   },
   footer: {
     '& .MuiTableCell-footer': {
-      color: '#ab47bc', //'#574b90'
+      color: '#1663BE', //'#574b90'
       opacity: 1,
       fontSize: '1.2em',
       fontWeight: 500
@@ -176,7 +176,7 @@ function TabelaManutencoes(props) {
     };
     const styleMedium = {
       backgroundColor: '#f7d794',
-      color: '#f19066',
+      color: '#d35400',
       padding: '1px 6px',
       borderRadius: '3px'
     };

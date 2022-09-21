@@ -11,7 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const styles = {
   destak: {
     fontWeight: '700',
-    color: '#574b90'
+    color: '#574b90',
   },
   cardCategoryWhite: {
     '&,& a,& a:hover,& a:focus': {
@@ -19,11 +19,11 @@ const styles = {
       margin: '0',
       fontSize: '14px',
       marginTop: '0',
-      marginBottom: '0'
+      marginBottom: '0',
     },
     '& a,& a:hover,& a:focus': {
-      color: '#FFFFFF'
-    }
+      color: '#FFFFFF',
+    },
   },
   cardTitleWhite: {
     color: '#FFFFFF',
@@ -37,21 +37,22 @@ const styles = {
       color: '#777',
       fontSize: '65%',
       fontWeight: '400',
-      lineHeight: '1'
-    }
-  }
+      lineHeight: '1',
+    },
+  },
 };
 
 function CardViatura(props) {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
 
-  const { prefixo, placa, marca, modelo, unidade } = props.viatura;
+  const { prefixo, tipo, fabricacao, placa, marca, modelo, unidade } =
+    props.viatura;
 
   return (
     <>
       <Card>
-        <CardHeader color='dark'>
+        <CardHeader color="dark">
           <h4 className={classes.cardTitleWhite}>Viatura</h4>
           <p className={classes.cardCategoryWhite}>Dados da viatura</p>
         </CardHeader>
@@ -62,54 +63,80 @@ function CardViatura(props) {
                 <GridItem xs={12} sm={12} md={2}>
                   <CustomInput
                     destak
-                    labelText='Prefixo'
-                    id='prefixo'
+                    labelText="Prefixo"
+                    id="prefixo"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                     inputProps={{
                       readOnly: true,
                       value: prefixo,
-                      className: classes.destak
+                      className: classes.destak,
                     }}
                   />
                 </GridItem>
                 <GridItem xs={12} sm={12} md={2}>
                   <CustomInput
-                    labelText='Placa'
-                    id='placa'
+                    labelText="Placa"
+                    id="placa"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                     inputProps={{
                       readOnly: true,
-                      value: placa
+                      value: placa,
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={5}>
+                <GridItem xs={12} sm={12} md={2}>
                   <CustomInput
-                    labelText='Viatura'
-                    id='viatura'
+                    labelText="Viatura"
+                    id="viatura"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                     inputProps={{
                       readOnly: true,
-                      value: `${marca} ${modelo}`
+                      value: `${marca} ${modelo}`,
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
+                <GridItem xs={12} sm={12} md={2}>
                   <CustomInput
-                    labelText='Unidade'
-                    id='unidade'
+                    labelText="Fabricação"
+                    id="fabricacao"
                     formControlProps={{
-                      fullWidth: true
+                      fullWidth: true,
                     }}
                     inputProps={{
                       readOnly: true,
-                      value: unidade
+                      value: fabricacao,
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={2}>
+                  <CustomInput
+                    labelText="Tipo"
+                    id="tipo"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      readOnly: true,
+                      value: tipo,
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={2}>
+                  <CustomInput
+                    labelText="Unidade"
+                    id="unidade"
+                    formControlProps={{
+                      fullWidth: true,
+                    }}
+                    inputProps={{
+                      readOnly: true,
+                      value: unidade,
                     }}
                   />
                 </GridItem>

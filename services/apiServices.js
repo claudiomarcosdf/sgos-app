@@ -18,7 +18,9 @@ async function getGastosPorPrefixoOuPlaca(prefixoOuPlaca) {
 }
 
 async function getViaturasEmManutencao(ano) {
-  const response = await axios.get(`${API_URL}/ordemservico/viaturasEmManutencao/${ano}`)
+  const response = await axios.get(
+    `${API_URL}/ordemservico/viaturasEmManutencao/${ano}`
+  );
 
   if (response.status !== 200) {
     throw Error(response.Error);
@@ -27,4 +29,20 @@ async function getViaturasEmManutencao(ano) {
   return response;
 }
 
-export { getGastosPorPrefixoOuPlaca, getViaturasEmManutencao };
+async function getHistoricoManutencao(prefixo) {
+  const response = await axios.get(
+    `${API_URL}/ordemservico/buscaPrefixo?prefixo=${prefixo}`
+  );
+
+  if (response.status !== 200) {
+    throw Error(response.Error);
+  }
+
+  return response;
+}
+
+export {
+  getGastosPorPrefixoOuPlaca,
+  getViaturasEmManutencao,
+  getHistoricoManutencao,
+};

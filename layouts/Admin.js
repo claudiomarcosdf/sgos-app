@@ -62,7 +62,7 @@ export default function Admin({ children, ...rest }) {
     if (navigator.platform.indexOf('Win') > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
-        suppressScrollY: false
+        suppressScrollY: false,
       });
       document.body.style.overflow = 'hidden';
     }
@@ -79,7 +79,7 @@ export default function Admin({ children, ...rest }) {
     <div className={classes.wrapper}>
       <Sidebar
         routes={routes}
-        logoText={'S G O S'}
+        logoText={'S G O S - web'}
         logo={logo}
         image={image}
         handleDrawerToggle={handleDrawerToggle}

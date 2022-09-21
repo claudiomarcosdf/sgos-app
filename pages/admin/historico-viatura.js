@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 
-import Admin from 'layouts/Admin.js';
-import GridItem from 'components/Grid/GridItem.js';
-import GridContainer from 'components/Grid/GridContainer.js';
-
-import Search from '@material-ui/icons/Search';
-import CustomInput from 'components/CustomInput/CustomInput.js';
-import Button from 'components/CustomButtons/Button.js';
 import { makeStyles } from '@material-ui/core/styles';
 
+import Admin from 'layouts/Admin.js';
+import GridContainer from 'components/Grid/GridContainer.js';
+import Button from 'components/CustomButtons/Button.js';
 import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress.js';
 
+import GridItem from 'components/Grid/GridItem';
+import CustomInput from 'components/CustomInput/CustomInput';
+import ProgressBar from 'components/ProgressBar/ProgressBar';
+import OrdemServico from 'components/OrdemServico/OrdemServico';
+import TabelaOrdemServico from 'components/TabelaOrdemServico/TabelaOrdemServico';
+import Search from '@material-ui/icons/Search';
 import CardViatura from 'components/CardViatura/CardViatura';
-import TabelaGastos from 'components/TabelaGastos/TabelaGastos';
-
-import buscaPrefixoOuPlaca from 'hooks/buscaPrefixoOuPlaca';
+import { useHistoricoManutencaoContext } from 'hooks/HistoricoManutencaoContext';
 
 const style = {
   boxFind: {
@@ -26,9 +26,9 @@ const style = {
   },
 };
 
-function GastosViatura() {
+function HistoricoViatura() {
   const [input, setInput] = useState('');
-  const { loading, data, viatura, buscar } = buscaPrefixoOuPlaca();
+  const { loading, data, viatura, buscar } = useHistoricoManutencaoContext();
 
   const useStyles = makeStyles(style);
   const classes = useStyles();
@@ -39,15 +39,13 @@ function GastosViatura() {
   };
 
   const buscarDados = (event) => {
-    //console.log(input);
     if (!input) return false;
     buscar(input);
-    //console.log(data);
   };
 
   return (
     <GridContainer>
-      {console.log(data)}
+      {/* <OrdemServico /> */}
       <GridItem xs={12} sm={12} md={12}>
         <div className={classes.boxFind}>
           <CustomInput
@@ -55,9 +53,9 @@ function GastosViatura() {
               className: classes.margin + ' ' + classes.search,
             }}
             inputProps={{
-              placeholder: 'Prefixo ou placa',
+              placeholder: 'Prefixo',
               inputProps: {
-                'aria-label': 'Prefixo ou placa',
+                'aria-label': 'Prefixo',
               },
               onChange: (event) => {
                 onHandleChageValue(event);
@@ -85,12 +83,12 @@ function GastosViatura() {
       </GridItem>
 
       <GridItem xs={12} sm={12} md={12}>
-        <TabelaGastos rows={data} />
+        <TabelaOrdemServico rows={data} />
       </GridItem>
     </GridContainer>
   );
 }
 
-GastosViatura.layout = Admin;
+HistoricoViatura.layout = Admin;
 
-export default GastosViatura;
+export default HistoricoViatura;

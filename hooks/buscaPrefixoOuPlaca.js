@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useToasts } from 'react-toast-notifications';
 import * as api from '../services/apiServices';
@@ -29,17 +29,19 @@ const buscaPrefixoOuPlaca = () => {
               cancelada: util.convertDisplay(os.cancelada),
               retorno: util.convertDisplay(os.retorno),
               total: os.total,
-              totalFormatado: util.formatCurrency(os.total, false)
+              totalFormatado: util.formatCurrency(os.total, false),
             };
           })
         );
 
         setViatura({
           prefixo: util.formatPrefixoOuPlaca(retorno.data[0].prefixo),
+          tipo: retorno.data[0].tipo,
+          fabricacao: retorno.data[0].fabricacao,
           placa: util.formatPrefixoOuPlaca(retorno.data[0].placa),
           marca: retorno.data[0].marca,
           modelo: retorno.data[0].modelo,
-          unidade: retorno.data[0].unidade
+          unidade: retorno.data[0].unidade,
         });
         setLoading(false);
       }

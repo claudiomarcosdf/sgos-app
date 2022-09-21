@@ -6,6 +6,7 @@ import LocationOn from '@material-ui/icons/LocationOn';
 import Notifications from '@material-ui/icons/Notifications';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import ListAlt from '@material-ui/icons/ListAlt';
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
 
 const dashboardRoutes = [
   {
@@ -13,64 +14,71 @@ const dashboardRoutes = [
     name: 'Home',
     icon: Dashboard,
 
-    layout: '/admin'
+    layout: '/admin',
   },
   {
     path: '/quadro-manutencoes',
     name: 'Quadro de manutenções',
     icon: ListAlt,
 
-    layout: '/admin'
+    layout: '/admin',
   },
   {
     path: '/gastos-viatura',
     name: 'Gastos da Viatura',
     icon: LocalAtmIcon,
 
-    layout: '/admin'
+    layout: '/admin',
+  },
+  {
+    path: '/historico-viatura',
+    name: 'Histórico da viatura',
+    icon: ImportContactsIcon,
+
+    layout: '/admin',
   },
   {
     path: '/user-profile',
     name: 'User Profile',
     icon: Person,
 
-    layout: '/admin'
+    layout: '/admin',
   },
   {
     path: '/table-list',
     name: 'Table List',
     icon: 'content_paste',
 
-    layout: '/admin'
+    layout: '/admin',
   },
   {
     path: '/typography',
     name: 'Typography',
     icon: LibraryBooks,
 
-    layout: '/admin'
+    layout: '/admin',
   },
   {
     path: '/icons',
     name: 'Icons',
     icon: BubbleChart,
 
-    layout: '/admin'
+    layout: '/admin',
   },
   {
     path: '/maps',
     name: 'Maps',
     icon: LocationOn,
 
-    layout: '/admin'
+    layout: '/admin',
   },
   {
     path: '/notifications',
     name: 'Notifications',
     icon: Notifications,
 
-    layout: '/admin'
-  }
+    layout: '/admin',
+  },
 ];
 
 export default dashboardRoutes;

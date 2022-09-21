@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 import Card from 'components/Card/Card.js';
 import CardHeader from 'components/Card/CardHeader.js';
@@ -7,10 +8,10 @@ import CardBody from 'components/Card/CardBody.js';
 import { formatCurrency } from '../../helper/util';
 
 import {
+  Button,
   Table,
   TableBody,
   TableCell,
-  TableFooter,
   TableHead,
   TableRow,
 } from '@material-ui/core';
@@ -66,48 +67,57 @@ const styles = {
 const columns = [
   { name: 'O.S º', align: 'left' },
   { name: 'Data' },
+  { name: 'Odom entrada' },
   { name: 'Executor' },
   { name: 'Preventiva' },
   { name: 'Corretiva' },
   { name: 'Cancelada' },
   { name: 'Retorno' },
-  { name: 'Total R$', align: 'right' },
+  { name: '', align: 'center' },
 ];
 
-function TabelaGastos(props) {
+// const rows = [
+//   {
+//     os: '127',
+//     data: '25/03/2022',
+//     odometro: 9332,
+//     executor: 'TAGUAMOTORS',
+//     preventiva: 'Sim',
+//     corretiva: 'Não',
+//     cancelada: 'Não',
+//     retorno: 'Não',
+//   },
+//   {
+//     os: '8694',
+//     data: '25/03/2022',
+//     odometro: 8332,
+//     executor: 'TAGUAMOTORS',
+//     preventiva: 'Sim',
+//     corretiva: 'Não',
+//     cancelada: 'Sim',
+//     retorno: 'Não',
+//   },
+// ];
+
+function TabelaOrdemServico(props) {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
 
   const { rows } = props;
 
-  const totalGeral = formatCurrency(
-    rows.reduce((acc, curr) => acc + curr.total, 0),
-    true
-  );
-
   return (
     <>
       <Card>
         <CardHeader color="dark">
-          <h4 className={classes.cardTitleWhite}>
-            Gastos com manutenções da viatura
-          </h4>
+          <h4 className={classes.cardTitleWhite}>Histórico de manutenções</h4>
           <p className={classes.cardCategoryWhite}>
-            Somatório de gastos por ordem de serviço
+            Lista das ordens de serviço da viatura
           </p>
         </CardHeader>
         <CardBody>
           {rows.length > 0 ? (
-            <Table>
+            <Table size="small">
               <TableHead>
-                <TableRow className={classes.root}>
-                  <TableCell align="center" colSpan={3}>
-                    Dados da O.S
-                  </TableCell>
-                  <TableCell align="center" colSpan={5}>
-                    Detalhes da manutenção
-                  </TableCell>
-                </TableRow>
                 <TableRow className={classes.root}>
                   {columns.map((column, i) => (
                     <TableCell
@@ -130,11 +140,15 @@ function TabelaGastos(props) {
 
                   return (
                     <TableRow hover key={i}>
-                      <TableCell>{row.os}</TableCell>
+                      <TableCell>{row.numero}</TableCell>
 
-                      <TableCell align="center">{row.data}</TableCell>
+                      <TableCell align="center">{row.data_entrada}</TableCell>
 
-                      <TableCell align="center">{row.executor}</TableCell>
+                      <TableCell align="center">
+                        {row.odometro_entrada}
+                      </TableCell>
+
+                      <TableCell align="center">{row.empresa}</TableCell>
 
                       <TableCell align="center">{row.preventiva}</TableCell>
 
@@ -146,18 +160,26 @@ function TabelaGastos(props) {
 
                       <TableCell align="center">{row.retorno}</TableCell>
 
-                      <TableCell align="right">{row.totalFormatado}</TableCell>
+                      <TableCell align="center">
+                        <Link
+                          href={{
+                            pathname: '/admin/detalhe-os',
+                            query: { numero: row.numero },
+                          }}
+                        >
+                          <Button
+                            color="primary"
+                            variant="outlined"
+                            size="small"
+                          >
+                            <a>Detalhar</a>
+                          </Button>
+                        </Link>
+                      </TableCell>
                     </TableRow>
                   );
                 })}
               </TableBody>
-              <TableFooter className={classes.footer}>
-                <TableRow>
-                  <TableCell align="right" colSpan={8}>
-                    Total geral: {totalGeral}
-                  </TableCell>
-                </TableRow>
-              </TableFooter>
             </Table>
           ) : (
             false
@@ -168,4 +190,4 @@ function TabelaGastos(props) {
   );
 }
 
-export default TabelaGastos;
+export default TabelaOrdemServico;
