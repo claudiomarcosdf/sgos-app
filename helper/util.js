@@ -12,7 +12,7 @@ function formatDateBr(date) {
   const dateToFormat = date.substring(0, 10);
   const currentDate = new Date(dateToFormat);
   const dateFormated = new Intl.DateTimeFormat('pt-BR', {
-    timeZone: 'UTC',
+    timeZone: 'UTC'
   }).format(currentDate);
 
   return dateFormated;
@@ -98,6 +98,12 @@ function retornaSomatorioDasNotasFiscais(notasFiscais) {
   return total;
 }
 
+function getPercentCombustivel(qtd_combustivel) {
+  const percent = (100 * parseInt(qtd_combustivel)) / 8;
+
+  return percent;
+}
+
 export {
   formatCurrency,
   formatDateBr,
@@ -108,4 +114,5 @@ export {
   retornaDescricaoTipo,
   retornaTotal,
   retornaSomatorioDasNotasFiscais,
+  getPercentCombustivel
 };
