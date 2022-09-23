@@ -41,8 +41,32 @@ async function getHistoricoManutencao(prefixo) {
   return response;
 }
 
+async function getGraficoTotais() {
+  const response = await axios.get(`${API_URL}/grafico/graficoTotais`);
+
+  if (response.status !== 200) {
+    throw Error(response.Error);
+  }
+
+  return response;
+}
+
+async function getGraficoModeloEmManutencao() {
+  const response = await axios.get(
+    `${API_URL}/grafico/graficoModelosEmManutencao`
+  );
+
+  if (response.status !== 200) {
+    throw Error(response.Error);
+  }
+
+  return response;
+}
+
 export {
   getGastosPorPrefixoOuPlaca,
   getViaturasEmManutencao,
   getHistoricoManutencao,
+  getGraficoTotais,
+  getGraficoModeloEmManutencao,
 };

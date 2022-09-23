@@ -24,7 +24,7 @@ export default function Header(props) {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
   function makeBrand() {
-    var name = 'NextJS Material Dashboard';
+    var name = 'Detalhe da Ordem de Serviço';
     props.routes.map((prop) => {
       if (router.route.indexOf(prop.layout + prop.path) !== -1) {
         name = props.rtlActive ? prop.rtlName : prop.name;
@@ -35,24 +35,24 @@ export default function Header(props) {
   }
   const { color } = props;
   const appBarClasses = classNames({
-    [' ' + classes[color]]: color
+    [' ' + classes[color]]: color,
   });
   return (
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
         <div className={classes.flex}>
           {/* Here we create navbar brand, based on route name */}
-          <Button color='transparent' href='#' className={classes.title}>
+          <Button color="transparent" href="#" className={classes.title}>
             {makeBrand()}
           </Button>
         </div>
-        <Hidden smDown implementation='css'>
+        <Hidden smDown implementation="css">
           {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
         </Hidden>
-        <Hidden mdUp implementation='css'>
+        <Hidden mdUp implementation="css">
           <IconButton
-            color='inherit'
-            aria-label='open drawer'
+            color="inherit"
+            aria-label="open drawer"
             onClick={props.handleDrawerToggle}
           >
             <Menu />
@@ -67,5 +67,5 @@ Header.propTypes = {
   color: PropTypes.oneOf(['primary', 'info', 'success', 'warning', 'danger']),
   rtlActive: PropTypes.bool,
   handleDrawerToggle: PropTypes.func,
-  routes: PropTypes.arrayOf(PropTypes.object)
+  routes: PropTypes.arrayOf(PropTypes.object),
 };

@@ -140,7 +140,7 @@ function TabelaOrdemServico(props) {
 
                   return (
                     <TableRow hover key={i}>
-                      <TableCell>{row.numero}</TableCell>
+                      <TableCell align="left">{row.numero}</TableCell>
 
                       <TableCell align="center">{row.data_entrada}</TableCell>
 

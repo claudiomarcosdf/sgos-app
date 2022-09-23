@@ -28,7 +28,7 @@ const styles = {
     margin: '0',
     fontSize: '14px',
     marginTop: '0',
-    marginBottom: '0'
+    marginBottom: '0',
   },
   cardTitleWhite: {
     color: '#FFFFFF',
@@ -37,22 +37,22 @@ const styles = {
     fontWeight: '300',
     fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
     marginBottom: '3px',
-    textDecoration: 'none'
+    textDecoration: 'none',
   },
   colorDestak: {
     color: '#1663BE',
-    fontWeight: '500'
-  }
+    fontWeight: '500',
+  },
 };
 
 function LinearProgressWithLabel(props) {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <Box sx={{ width: '100%', mr: 1 }}>
-        <LinearProgress variant='determinate' {...props} />
+        <LinearProgress variant="determinate" {...props} />
       </Box>
-      <Box sx={{ minWidth: 30 }}>
-        <Typography variant='body2' color='text.secondary'>{`${Math.round(
+      <Box sx={{ minWidth: 35 }}>
+        <Typography variant="body2" color="text.secondary">{`${Math.round(
           props.value
         )}%`}</Typography>
       </Box>
@@ -61,7 +61,7 @@ function LinearProgressWithLabel(props) {
 }
 
 LinearProgressWithLabel.propTypes = {
-  value: PropTypes.number.isRequired
+  value: PropTypes.number.isRequired,
 };
 
 const emptyData = {
@@ -83,7 +83,7 @@ const emptyData = {
   cancelada: null,
   concluida: null,
   retorno: null,
-  notas_fiscais: []
+  notas_fiscais: [],
 };
 
 function OrdemServico() {
@@ -117,7 +117,7 @@ function OrdemServico() {
     cancelada,
     concluida,
     retorno,
-    notas_fiscais
+    notas_fiscais,
   } = ordemServico ? ordemServico : emptyData;
 
   return (
@@ -131,7 +131,7 @@ function OrdemServico() {
         <>
           <GridItem xs={12} sm={12} md={9}>
             <Card>
-              <CardHeader color='dark'>
+              <CardHeader color="dark">
                 <div
                   style={{ display: 'flex', justifyContent: 'space-between' }}
                 >
@@ -147,7 +147,7 @@ function OrdemServico() {
                         style={{
                           backgroundColor: '#ff5e57', //'#ff7675',
                           borderRadius: '3px',
-                          padding: '4px 6px'
+                          padding: '4px 6px',
                         }}
                       >
                         CANCELADA
@@ -166,7 +166,7 @@ function OrdemServico() {
                         color: '#1663BE',
                         opacity: 0.9,
                         marginTop: '13px',
-                        marginBottom: '13px'
+                        marginBottom: '13px',
                       }}
                     >
                       Dados da Baixa
@@ -176,40 +176,40 @@ function OrdemServico() {
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
-                      labelText='Número O.S'
-                      id='numero'
+                      labelText="Número O.S"
+                      id="numero"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
                         readOnly: true,
-                        value: numero
+                        value: numero,
                       }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
-                      labelText='Data de entrada'
-                      id='data_entrada'
+                      labelText="Data de entrada"
+                      id="data_entrada"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
                         readOnly: true,
-                        value: `${data_entrada} ${hora_entrada}`
+                        value: `${data_entrada} ${hora_entrada}`,
                       }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
-                      labelText='Odômetro Entrada'
-                      id='odometro_entrada'
+                      labelText="Odômetro Entrada"
+                      id="odometro_entrada"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
                         readOnly: true,
-                        value: odometro_entrada
+                        value: odometro_entrada,
                       }}
                     />
                   </GridItem>
@@ -217,40 +217,40 @@ function OrdemServico() {
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
                     <CustomInput
-                      labelText='Empresa'
-                      id='empresa'
+                      labelText="Empresa"
+                      id="empresa"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
                         readOnly: true,
-                        value: empresa
+                        value: empresa,
                       }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={2}>
                     <CustomInput
-                      labelText='Preventiva'
-                      id='revisaokm'
+                      labelText="Preventiva"
+                      id="revisaokm"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
                         readOnly: true,
-                        value: preventiva
+                        value: preventiva,
                       }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={2}>
                     <CustomInput
-                      labelText='Corretiva'
-                      id='corretiva'
+                      labelText="Corretiva"
+                      id="corretiva"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
                         readOnly: true,
-                        value: corretiva
+                        value: corretiva,
                       }}
                     />
                   </GridItem>
@@ -260,7 +260,7 @@ function OrdemServico() {
                         fontSize: '10px',
                         opacity: 0.9,
                         marginBottom: '10px',
-                        marginTop: '4px'
+                        marginTop: '4px',
                       }}
                     >
                       Qtde combustível
@@ -273,18 +273,18 @@ function OrdemServico() {
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
-                      labelText='Descrição do serviço'
-                      id='descricao_servico'
+                      labelText="Descrição do serviço"
+                      id="descricao_servico"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
                         style: {
-                          color: '#2c3e50'
+                          color: '#2c3e50',
                         },
                         multiline: true,
                         readOnly: true,
-                        value: descricao_servico
+                        value: descricao_servico,
                       }}
                     />
                   </GridItem>
@@ -292,18 +292,18 @@ function OrdemServico() {
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={12}>
                     <CustomInput
-                      labelText='Serviço adicionado pela empresa'
-                      id='servico_adicional'
+                      labelText="Serviço adicionado pela empresa"
+                      id="servico_adicional"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
                         style: {
-                          color: '#2c3e50'
+                          color: '#2c3e50',
                         },
                         multiline: true,
                         readOnly: true,
-                        value: servico_adicional
+                        value: servico_adicional,
                       }}
                     />
                   </GridItem>
@@ -314,7 +314,7 @@ function OrdemServico() {
                       style={{
                         color: '#1663BE',
                         opacity: 0.9,
-                        marginBottom: '13px'
+                        marginBottom: '13px',
                       }}
                     >
                       Dados da Alta
@@ -324,27 +324,27 @@ function OrdemServico() {
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
-                      labelText='Data de saída'
-                      id='data_saida'
+                      labelText="Data de saída"
+                      id="data_saida"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
                         readOnly: true,
-                        value: `${data_saida} ${hora_saida}`
+                        value: `${data_saida} ${hora_saida}`,
                       }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
-                      labelText='Odômetro Saída'
-                      id='odometro_saida'
+                      labelText="Odômetro Saída"
+                      id="odometro_saida"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
                         readOnly: true,
-                        value: odometro_saida
+                        value: odometro_saida,
                       }}
                     />
                   </GridItem>
@@ -352,27 +352,27 @@ function OrdemServico() {
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
-                      labelText='Alta p/'
-                      id='nome_alta'
+                      labelText="Alta p/"
+                      id="nome_alta"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
                         readOnly: true,
-                        value: nome_alta
+                        value: nome_alta,
                       }}
                     />
                   </GridItem>
                   <GridItem xs={12} sm={12} md={6}>
                     <CustomInput
-                      labelText='Matrícula'
-                      id='matricula_alta'
+                      labelText="Matrícula"
+                      id="matricula_alta"
                       formControlProps={{
-                        fullWidth: true
+                        fullWidth: true,
                       }}
                       inputProps={{
                         readOnly: true,
-                        value: matricula_alta
+                        value: matricula_alta,
                       }}
                     />
                   </GridItem>
@@ -383,7 +383,7 @@ function OrdemServico() {
                       style={{
                         color: '#1663BE',
                         opacity: 0.9,
-                        marginBottom: '13px'
+                        marginBottom: '13px',
                       }}
                     >
                       Dados da Nota Fiscal
@@ -401,8 +401,8 @@ function OrdemServico() {
           <GridItem xs={12} sm={12} md={3}>
             <Card profile>
               <CardAvatar profile>
-                <a href='#cman' onClick={(e) => e.preventDefault()}>
-                  <img src={avatar} alt='...' />
+                <a href="#cman" onClick={(e) => e.preventDefault()}>
+                  <img src={avatar} alt="..." />
                 </a>
               </CardAvatar>
               <CardBody profile>

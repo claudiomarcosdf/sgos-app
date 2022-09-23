@@ -34,12 +34,14 @@ import CardFooter from 'components/Card/CardFooter.js';
 import { bugs, website, server } from 'variables/general.js';
 
 import {
+  modelosChart,
   dailySalesChart,
   emailsSubscriptionChart,
-  completedTasksChart
+  completedTasksChart,
 } from 'variables/charts.js';
 
 import styles from 'assets/jss/nextjs-material-dashboard/views/dashboardStyle.js';
+import exibeDadosGraficos from 'hooks/exibeDadosGraficos';
 
 const stylesLocal = {
   noteTitle: {
@@ -51,7 +53,7 @@ const stylesLocal = {
     left: '0',
     marginLeft: '20px',
     width: '270px',
-    paddingBottom: '10px'
+    paddingBottom: '10px',
   },
   note: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -64,15 +66,19 @@ const stylesLocal = {
     left: '0',
     marginLeft: '20px',
     width: '270px',
-    paddingBottom: '40px'
-  }
+    paddingBottom: '40px',
+  },
 };
 
 function Dashboard() {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
+
+  const { totais, modelos, loading, erro } = exibeDadosGraficos();
+
   return (
     <div>
+      {console.log('MODELOS', modelos)}
       <GridContainer>
         <div>
           <div style={stylesLocal.noteTitle}>SGOS-Web</div>
@@ -87,13 +93,14 @@ function Dashboard() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={4}>
           <Card>
-            <CardHeader color='warning' stats icon>
-              <CardIcon color='warning'>
+            <CardHeader color="warning" stats icon>
+              <CardIcon color="warning">
                 <Icon>content_copy</Icon>
               </CardIcon>
               <p className={classes.cardCategory}>Em manutenção</p>
               <h3 className={classes.cardTitle}>
-                49/50 <small>GB</small>
+                {`${totais.manutencao} `}
+                <small>Vtrs</small>
               </h3>
             </CardHeader>
             <CardFooter stats>
@@ -108,12 +115,12 @@ function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Card>
-            <CardHeader color='dark' stats icon>
-              <CardIcon color='dark'>
+            <CardHeader color="dark" stats icon>
+              <CardIcon color="dark">
                 <Store />
               </CardIcon>
               <p className={classes.cardCategory}>Baixas de hoje</p>
-              <h3 className={classes.cardTitle}>$34,245</h3>
+              <h3 className={classes.cardTitle}>{totais.baixasHoje}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -125,12 +132,12 @@ function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Card>
-            <CardHeader color='danger' stats icon>
-              <CardIcon color='danger'>
+            <CardHeader color="danger" stats icon>
+              <CardIcon color="danger">
                 <Icon>info_outline</Icon>
               </CardIcon>
               <p className={classes.cardCategory}>Altas de hoje</p>
-              <h3 className={classes.cardTitle}>75</h3>
+              <h3 className={classes.cardTitle}>{totais.altasHoje}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>

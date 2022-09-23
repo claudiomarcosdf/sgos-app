@@ -12,7 +12,7 @@ function formatDateBr(date) {
   const dateToFormat = date.substring(0, 10);
   const currentDate = new Date(dateToFormat);
   const dateFormated = new Intl.DateTimeFormat('pt-BR', {
-    timeZone: 'UTC'
+    timeZone: 'UTC',
   }).format(currentDate);
 
   return dateFormated;
@@ -56,8 +56,8 @@ function groupBy(array, key) {
   }, {});
 }
 
-function formatModelo(modelo) {
-  const modelo1 = modelo.split(' ', 3);
+function formatModelo(modelo, spaces = 3) {
+  const modelo1 = modelo.split(' ', spaces);
   const modeloFinal = modelo1.join(' ');
   return modelo ? modeloFinal : '';
 }
@@ -104,6 +104,10 @@ function getPercentCombustivel(qtd_combustivel) {
   return percent;
 }
 
+function retiraQuebraDeLinha(texto) {
+  return texto.replaceAll('\r\n', ' ');
+}
+
 export {
   formatCurrency,
   formatDateBr,
@@ -114,5 +118,6 @@ export {
   retornaDescricaoTipo,
   retornaTotal,
   retornaSomatorioDasNotasFiscais,
-  getPercentCombustivel
+  getPercentCombustivel,
+  retiraQuebraDeLinha,
 };

@@ -28,7 +28,7 @@ export default function HistoricoManutencaoProvider({ children }) {
           marca: data.marca,
           modelo: data.modelo,
           fabricacao: data.fabricacao,
-          renavam: data.renavan
+          renavam: data.renavan,
         });
 
         setData(
@@ -45,14 +45,14 @@ export default function HistoricoManutencaoProvider({ children }) {
               nome_alta: os.nome_alta,
               matricula_alta: os.matricula_alta,
               empresa: os.empresa.nome,
-              descricao_servico: os.descricao_servico,
-              servico_adicional: os.servico_adicional,
+              descricao_servico: util.retiraQuebraDeLinha(os.descricao_servico),
+              servico_adicional: util.retiraQuebraDeLinha(os.servico_adicional),
               preventiva: util.convertDisplay(os.revisaokm),
               corretiva: util.convertDisplay(os.corretiva),
               cancelada: util.convertDisplay(os.cancelada),
               concluida: util.convertDisplay(os.concluida),
               retorno: util.convertDisplay(os.retorno),
-              notas_fiscais: os.notas_fiscais
+              notas_fiscais: os.notas_fiscais,
             };
           })
         );
@@ -76,7 +76,7 @@ export default function HistoricoManutencaoProvider({ children }) {
         data: data ? data : [],
         viatura: viatura ? viatura : {},
         loading,
-        buscar
+        buscar,
       }}
     >
       {children}
