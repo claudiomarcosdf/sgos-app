@@ -12,7 +12,7 @@ function formatDateBr(date) {
   const dateToFormat = date.substring(0, 10);
   const currentDate = new Date(dateToFormat);
   const dateFormated = new Intl.DateTimeFormat('pt-BR', {
-    timeZone: 'UTC',
+    timeZone: 'UTC'
   }).format(currentDate);
 
   return dateFormated;
@@ -108,6 +108,15 @@ function retiraQuebraDeLinha(texto) {
   return texto.replaceAll('\r\n', ' ');
 }
 
+function retornaMaiores(array, qtd) {
+  const result = array.sort((a, b) =>
+    a.qtdeBaixas < b.qtdeBaixas ? 1 : a.qtdeBaixas > b.qtdeBaixas ? -1 : 0
+  );
+
+  console.log(result.slice(0, qtd));
+  return result.slice(0, qtd);
+}
+
 export {
   formatCurrency,
   formatDateBr,
@@ -120,4 +129,5 @@ export {
   retornaSomatorioDasNotasFiscais,
   getPercentCombustivel,
   retiraQuebraDeLinha,
+  retornaMaiores
 };

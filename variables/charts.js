@@ -12,18 +12,15 @@ var delays2 = 80,
 
 const modelosChart = {
   options: {
+    low: 0,
+    high: 150,
     seriesBarDistance: 150,
-    reverseData: true,
     horizontalBars: false,
     axisY: {
-      offset: 70,
+      offset: 25,
+      seriesBarDistance: 50
     },
-    stackBars: true,
-    axisX: {
-      labelInterpolationFnc: function (value) {
-        return value + '@';
-      },
-    },
+    stackBars: true
   },
   responsiveOptions: [
     [
@@ -31,11 +28,11 @@ const modelosChart = {
       {
         axisX: {
           labelInterpolationFnc: function (value) {
-            return value[0] + '@';
-          },
-        },
-      },
-    ],
+            return value[0];
+          }
+        }
+      }
+    ]
   ],
   animation: {
     draw: function (data) {
@@ -46,12 +43,12 @@ const modelosChart = {
             dur: durations2,
             from: 0,
             to: 1,
-            easing: 'ease',
-          },
+            easing: 'ease'
+          }
         });
       }
-    },
-  },
+    }
+  }
 };
 
 // ##############################
@@ -61,7 +58,7 @@ const modelosChart = {
 const dailySalesChart = {
   data: {
     labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-    series: [[12, 17, 7, 17, 23, 18, 38]],
+    series: [[12, 17, 7, 17, 23, 18, 38]]
   },
   options: {
     low: 0,
@@ -70,8 +67,8 @@ const dailySalesChart = {
       top: 0,
       right: 0,
       bottom: 0,
-      left: 0,
-    },
+      left: 0
+    }
   },
   // for animation
   animation: {
@@ -86,8 +83,8 @@ const dailySalesChart = {
               .scale(1, 0)
               .translate(0, data.chartRect.height())
               .stringify(),
-            to: data.path.clone().stringify(),
-          },
+            to: data.path.clone().stringify()
+          }
         });
       } else if (data.type === 'point') {
         data.element.animate({
@@ -96,12 +93,12 @@ const dailySalesChart = {
             dur: durations,
             from: 0,
             to: 1,
-            easing: 'ease',
-          },
+            easing: 'ease'
+          }
         });
       }
-    },
-  },
+    }
+  }
 };
 
 // ##############################
@@ -122,13 +119,13 @@ const emailsSubscriptionChart = {
       'Sep',
       'Oct',
       'Nov',
-      'Dec',
+      'Dec'
     ],
-    series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]],
+    series: [[542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]]
   },
   options: {
     axisX: {
-      showGrid: false,
+      showGrid: false
     },
     low: 0,
     high: 1000,
@@ -136,8 +133,8 @@ const emailsSubscriptionChart = {
       top: 0,
       right: 5,
       bottom: 0,
-      left: 0,
-    },
+      left: 0
+    }
   },
   responsiveOptions: [
     [
@@ -147,10 +144,10 @@ const emailsSubscriptionChart = {
         axisX: {
           labelInterpolationFnc: function (value) {
             return value[0];
-          },
-        },
-      },
-    ],
+          }
+        }
+      }
+    ]
   ],
   animation: {
     draw: function (data) {
@@ -161,12 +158,12 @@ const emailsSubscriptionChart = {
             dur: durations2,
             from: 0,
             to: 1,
-            easing: 'ease',
-          },
+            easing: 'ease'
+          }
         });
       }
-    },
-  },
+    }
+  }
 };
 
 // ##############################
@@ -176,7 +173,7 @@ const emailsSubscriptionChart = {
 const completedTasksChart = {
   data: {
     labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
-    series: [[230, 750, 450, 300, 280, 240, 200, 190]],
+    series: [[230, 750, 450, 300, 280, 240, 200, 190]]
   },
   options: {
     low: 0,
@@ -185,8 +182,8 @@ const completedTasksChart = {
       top: 0,
       right: 0,
       bottom: 0,
-      left: 0,
-    },
+      left: 0
+    }
   },
   animation: {
     draw: function (data) {
@@ -200,8 +197,8 @@ const completedTasksChart = {
               .scale(1, 0)
               .translate(0, data.chartRect.height())
               .stringify(),
-            to: data.path.clone().stringify(),
-          },
+            to: data.path.clone().stringify()
+          }
         });
       } else if (data.type === 'point') {
         data.element.animate({
@@ -210,17 +207,17 @@ const completedTasksChart = {
             dur: durations,
             from: 0,
             to: 1,
-            easing: 'ease',
-          },
+            easing: 'ease'
+          }
         });
       }
-    },
-  },
+    }
+  }
 };
 
 module.exports = {
   modelosChart,
   dailySalesChart,
   emailsSubscriptionChart,
-  completedTasksChart,
+  completedTasksChart
 };

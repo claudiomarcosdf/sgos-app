@@ -6,7 +6,6 @@ import * as util from '../helper/util';
 const exibeDadosGraficos = () => {
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState('');
-  const [headers, setHeaders] = useState([]);
   const [totais, setTotais] = useState({});
   const [modelos, setModelos] = useState({});
 
@@ -25,14 +24,16 @@ const exibeDadosGraficos = () => {
         const labels = [];
         const series = [];
 
-        retornoModelos.data.map((obj) => {
+        const maioresBaixas = util.retornaMaiores(retornoModelos.data, 15);
+
+        maioresBaixas.map((obj) => {
           labels.push(util.formatModelo(obj.modelo, 2));
           series.push(obj.qtdeBaixas);
         });
 
         const objArray = { labels: labels, series: [series] };
 
-        console.log('MODELOS', objArray);
+        //console.log('MODELOS', objArray);
         setModelos(objArray);
       }
     } catch (error) {
@@ -40,7 +41,7 @@ const exibeDadosGraficos = () => {
       console.log(error);
 
       setErro(
-        error.response.status == 500
+        error?.response?.status == 500
           ? '  O servidor não responde 😕'
           : '  Erro no servidor'
       );

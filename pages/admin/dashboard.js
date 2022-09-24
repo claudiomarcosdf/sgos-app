@@ -37,7 +37,7 @@ import {
   modelosChart,
   dailySalesChart,
   emailsSubscriptionChart,
-  completedTasksChart,
+  completedTasksChart
 } from 'variables/charts.js';
 
 import styles from 'assets/jss/nextjs-material-dashboard/views/dashboardStyle.js';
@@ -53,7 +53,7 @@ const stylesLocal = {
     left: '0',
     marginLeft: '20px',
     width: '270px',
-    paddingBottom: '10px',
+    paddingBottom: '10px'
   },
   note: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -66,8 +66,8 @@ const stylesLocal = {
     left: '0',
     marginLeft: '20px',
     width: '270px',
-    paddingBottom: '40px',
-  },
+    paddingBottom: '40px'
+  }
 };
 
 function Dashboard() {
@@ -93,8 +93,8 @@ function Dashboard() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={4}>
           <Card>
-            <CardHeader color="warning" stats icon>
-              <CardIcon color="warning">
+            <CardHeader color='warning' stats icon>
+              <CardIcon color='warning'>
                 <Icon>content_copy</Icon>
               </CardIcon>
               <p className={classes.cardCategory}>Em manutenção</p>
@@ -115,8 +115,8 @@ function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Card>
-            <CardHeader color="dark" stats icon>
-              <CardIcon color="dark">
+            <CardHeader color='dark' stats icon>
+              <CardIcon color='dark'>
                 <Store />
               </CardIcon>
               <p className={classes.cardCategory}>Baixas de hoje</p>
@@ -132,8 +132,8 @@ function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Card>
-            <CardHeader color="danger" stats icon>
-              <CardIcon color="danger">
+            <CardHeader color='danger' stats icon>
+              <CardIcon color='danger'>
                 <Icon>info_outline</Icon>
               </CardIcon>
               <p className={classes.cardCategory}>Altas de hoje</p>
@@ -143,6 +143,33 @@ function Dashboard() {
               <div className={classes.stats}>
                 <DateRange />
                 Altas do dia
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+      </GridContainer>
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+          <Card chart>
+            <CardHeader color='dark'>
+              <ChartistGraph
+                className='ct-chart'
+                data={modelos}
+                type='Bar'
+                options={modelosChart.options}
+                responsiveOptions={modelosChart.responsiveOptions}
+                listener={modelosChart.animation}
+              />
+            </CardHeader>
+            <CardBody>
+              <h4 className={classes.cardTitle}>Modelos em manutenção</h4>
+              <p className={classes.cardCategory}>
+                Os modelos de viaturas com maior quantidade de baixas
+              </p>
+            </CardBody>
+            <CardFooter chart>
+              <div className={classes.stats}>
+                <AccessTime /> atualizado
               </div>
             </CardFooter>
           </Card>

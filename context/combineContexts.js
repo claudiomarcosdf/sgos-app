@@ -1,11 +1,13 @@
 import React from 'react';
 
-export const combineContexts = ({ components = [], children }) => {
+export const combineContexts = (providers) => {
   return (
     <>
-      {components.reduceRight((acc, Comp) => {
-        return <Comp>{acc}</Comp>;
-      }, children)}
+      {providers.reduce((Prev, Curr) => ({ children }) => (
+        <Prev>
+          <Curr>{children}</Curr>
+        </Prev>
+      ))}
     </>
   );
 };

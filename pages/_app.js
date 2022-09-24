@@ -8,7 +8,7 @@ import { ToastProvider } from 'react-toast-notifications';
 import PageChange from 'components/PageChange/PageChange.js';
 
 import 'assets/css/nextjs-material-dashboard.css?v=1.1.0';
-import { AppContextProvider } from 'context/AppContextProvider';
+//import { AppContextProvider } from 'context/AppContextProvider';
 import HistoricoManutencaoProvider from 'hooks/HistoricoManutencaoContext';
 
 Router.events.on('routeChangeStart', (url) => {
@@ -53,18 +53,18 @@ export default class MyApp extends App {
       <React.Fragment>
         <Head>
           <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+            name='viewport'
+            content='width=device-width, initial-scale=1, shrink-to-fit=no'
           />
           <title>CMan - Centro de Manutenção</title>
-          <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+          <script src='https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE'></script>
         </Head>
-        <ToastProvider autoDismiss={true} autoDismissTimeout="4000">
-          <Layout>
-            <HistoricoManutencaoProvider>
+        <ToastProvider autoDismiss={true} autoDismissTimeout='4000'>
+          <HistoricoManutencaoProvider>
+            <Layout>
               <Component {...pageProps} />
-            </HistoricoManutencaoProvider>
-          </Layout>
+            </Layout>
+          </HistoricoManutencaoProvider>
         </ToastProvider>
       </React.Fragment>
     );
