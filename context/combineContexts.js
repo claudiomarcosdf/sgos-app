@@ -1,13 +1,8 @@
 import React from 'react';
 
-export const combineContexts = (providers) => {
-  return (
-    <>
-      {providers.reduce((Prev, Curr) => ({ children }) => (
-        <Prev>
-          <Curr>{children}</Curr>
-        </Prev>
-      ))}
-    </>
-  );
-};
+export const combineContexts =
+  (...providers) =>
+  (props) =>
+    providers.reduceRight((children, Provider) => {
+      return <Provider {...props}>{children}</Provider>;
+    }, props.children);

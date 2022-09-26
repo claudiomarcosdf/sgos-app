@@ -28,7 +28,7 @@ export default function HistoricoManutencaoProvider({ children }) {
           marca: data.marca,
           modelo: data.modelo,
           fabricacao: data.fabricacao,
-          renavam: data.renavan,
+          renavam: data.renavan
         });
 
         setData(
@@ -38,7 +38,7 @@ export default function HistoricoManutencaoProvider({ children }) {
               data_entrada: util.formatDateBr(os.data_entrada),
               hora_entrada: os.hora_entrada,
               odometro_entrada: os.odometro_entrada,
-              qtd_combustivel: util.getPercentCombustivel(os.qtd_combustivel),
+              qtd_combustivel: os.qtd_combustivel, //util.getPercentCombustivel(os.qtd_combustivel),
               data_saida: util.formatDateBr(os.data_saida),
               hora_saida: os.hora_saida,
               odometro_saida: os.odometro_saida,
@@ -52,7 +52,7 @@ export default function HistoricoManutencaoProvider({ children }) {
               cancelada: util.convertDisplay(os.cancelada),
               concluida: util.convertDisplay(os.concluida),
               retorno: util.convertDisplay(os.retorno),
-              notas_fiscais: os.notas_fiscais,
+              notas_fiscais: os.notas_fiscais
             };
           })
         );
@@ -60,13 +60,14 @@ export default function HistoricoManutencaoProvider({ children }) {
         setLoading(false);
       }
     } catch (error) {
+      console.log('Erro!!!', error);
       setLoading(false);
-      const msg =
-        error.response.status == 500
-          ? 'O Servidor não responde 😕'
-          : error.response.data;
+      const msg = util.retornaErro(
+        error?.response?.status,
+        error?.response?.data
+      );
+
       addToast(msg, { appearance: 'error' });
-      console.log('Erro!!!', error.response.data);
     }
   }
 
@@ -76,7 +77,7 @@ export default function HistoricoManutencaoProvider({ children }) {
         data: data ? data : [],
         viatura: viatura ? viatura : {},
         loading,
-        buscar,
+        buscar
       }}
     >
       {children}

@@ -34,11 +34,7 @@ const exibeManutencoesAbertas = () => {
       }
     } catch (error) {
       setLoading(false);
-      setErro(
-        error.response.status == 500
-          ? '  O servidor não responde 😕'
-          : '  Erro no servidor'
-      );
+      setErro(util.retornaErro(error?.response?.status));
       console.log(error);
     }
   }

@@ -29,7 +29,7 @@ const buscaPrefixoOuPlaca = () => {
               cancelada: util.convertDisplay(os.cancelada),
               retorno: util.convertDisplay(os.retorno),
               total: os.total,
-              totalFormatado: util.formatCurrency(os.total, false),
+              totalFormatado: util.formatCurrency(os.total, false)
             };
           })
         );
@@ -41,16 +41,18 @@ const buscaPrefixoOuPlaca = () => {
           placa: util.formatPrefixoOuPlaca(retorno.data[0].placa),
           marca: retorno.data[0].marca,
           modelo: retorno.data[0].modelo,
-          unidade: retorno.data[0].unidade,
+          unidade: retorno.data[0].unidade
         });
         setLoading(false);
       }
     } catch (error) {
       setLoading(false);
-      const msg =
-        error.response.status == 500
-          ? 'O Servidor não responde 😕'
-          : error.response.data;
+      console.log(error);
+      const msg = util.retornaErro(
+        error?.response?.status,
+        error?.response?.data
+      );
+
       addToast(msg, { appearance: 'error' });
       console.log('Erro!!!', error.response.data);
     }

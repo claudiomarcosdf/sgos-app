@@ -99,13 +99,15 @@ function retornaSomatorioDasNotasFiscais(notasFiscais) {
 }
 
 function getPercentCombustivel(qtd_combustivel) {
-  const percent = (100 * parseInt(qtd_combustivel)) / 8;
+  const qtd = qtd_combustivel == -1 ? 0 : qtd_combustivel;
+
+  const percent = (100 * parseInt(qtd)) / 8;
 
   return percent;
 }
 
 function retiraQuebraDeLinha(texto) {
-  return texto.replaceAll('\r\n', ' ');
+  return texto ? texto.replaceAll('\r\n', ' ') : '';
 }
 
 function retornaMaiores(array, qtd) {
@@ -115,6 +117,25 @@ function retornaMaiores(array, qtd) {
 
   console.log(result.slice(0, qtd));
   return result.slice(0, qtd);
+}
+
+function retornaErro(status, originalMsg) {
+  let msg = '';
+
+  switch (status) {
+    case 406:
+      msg = '  O parâmtro informado não é válido 🚫';
+      break;
+    case 500:
+      msg = '  O servidor não responde 😕';
+      break;
+
+    default:
+      msg = originalMsg ? originalMsg : '  Erro no servidor 🔌';
+      break;
+  }
+
+  return msg;
 }
 
 export {
@@ -129,5 +150,6 @@ export {
   retornaSomatorioDasNotasFiscais,
   getPercentCombustivel,
   retiraQuebraDeLinha,
-  retornaMaiores
+  retornaMaiores,
+  retornaErro
 };

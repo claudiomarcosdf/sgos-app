@@ -8,8 +8,8 @@ import { ToastProvider } from 'react-toast-notifications';
 import PageChange from 'components/PageChange/PageChange.js';
 
 import 'assets/css/nextjs-material-dashboard.css?v=1.1.0';
-//import { AppContextProvider } from 'context/AppContextProvider';
-import HistoricoManutencaoProvider from 'hooks/HistoricoManutencaoContext';
+import { AppContextProvider } from 'context/AppContextProvider';
+//import HistoricoManutencaoProvider from 'hooks/HistoricoManutencaoContext';
 
 Router.events.on('routeChangeStart', (url) => {
   console.log(`Loading: ${url}`);
@@ -60,11 +60,11 @@ export default class MyApp extends App {
           <script src='https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE'></script>
         </Head>
         <ToastProvider autoDismiss={true} autoDismissTimeout='4000'>
-          <HistoricoManutencaoProvider>
+          <AppContextProvider>
             <Layout>
               <Component {...pageProps} />
             </Layout>
-          </HistoricoManutencaoProvider>
+          </AppContextProvider>
         </ToastProvider>
       </React.Fragment>
     );

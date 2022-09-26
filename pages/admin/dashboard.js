@@ -99,8 +99,8 @@ function Dashboard() {
               </CardIcon>
               <p className={classes.cardCategory}>Em manutenção</p>
               <h3 className={classes.cardTitle}>
-                {`${totais.manutencao} `}
-                <small>Vtrs</small>
+                {totais.manutencao || 0}
+                <small>&nbsp;Vtrs</small>
               </h3>
             </CardHeader>
             <CardFooter stats>
@@ -120,7 +120,7 @@ function Dashboard() {
                 <Store />
               </CardIcon>
               <p className={classes.cardCategory}>Baixas de hoje</p>
-              <h3 className={classes.cardTitle}>{totais.baixasHoje}</h3>
+              <h3 className={classes.cardTitle}>{totais.baixasHoje || 0}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
@@ -137,7 +137,7 @@ function Dashboard() {
                 <Icon>info_outline</Icon>
               </CardIcon>
               <p className={classes.cardCategory}>Altas de hoje</p>
-              <h3 className={classes.cardTitle}>{totais.altasHoje}</h3>
+              <h3 className={classes.cardTitle}>{totais.altasHoje || 0}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>

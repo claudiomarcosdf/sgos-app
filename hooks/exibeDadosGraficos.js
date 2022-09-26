@@ -40,11 +40,7 @@ const exibeDadosGraficos = () => {
       setLoading(false);
       console.log(error);
 
-      setErro(
-        error?.response?.status == 500
-          ? '  O servidor não responde 😕'
-          : '  Erro no servidor'
-      );
+      setErro(util.retornaErro(error?.response?.status));
     }
   }
 
