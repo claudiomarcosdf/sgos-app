@@ -12,7 +12,7 @@ function formatDateBr(date) {
   const dateToFormat = date.substring(0, 10);
   const currentDate = new Date(dateToFormat);
   const dateFormated = new Intl.DateTimeFormat('pt-BR', {
-    timeZone: 'UTC'
+    timeZone: 'UTC',
   }).format(currentDate);
 
   return dateFormated;
@@ -72,6 +72,16 @@ function retornaDescricaoTipo(obj) {
     : 'S/I';
 }
 
+function retornaLegendaTipo(tipo) {
+  return tipo == 1
+    ? 'PEÇA'
+    : tipo == 2
+    ? 'SERVIÇO'
+    : tipo == 3
+    ? 'ÓLEO'
+    : 'S/I';
+}
+
 function retornaTotal(obj) {
   return obj.total_em_pecas != '0.00'
     ? formatCurrency(parseFloat(obj.total_em_pecas), false)
@@ -115,7 +125,7 @@ function retornaMaiores(array, qtd) {
     a.qtdeBaixas < b.qtdeBaixas ? 1 : a.qtdeBaixas > b.qtdeBaixas ? -1 : 0
   );
 
-  console.log(result.slice(0, qtd));
+  //console.log(result.slice(0, qtd));
   return result.slice(0, qtd);
 }
 
@@ -138,6 +148,11 @@ function retornaErro(status, originalMsg) {
   return msg;
 }
 
+function calcularTotal(qtd, valor, desconto, simbol) {
+  const total = parseFloat(qtd) * parseFloat(valor) - parseFloat(desconto);
+  return total;
+}
+
 export {
   formatCurrency,
   formatDateBr,
@@ -151,5 +166,7 @@ export {
   getPercentCombustivel,
   retiraQuebraDeLinha,
   retornaMaiores,
-  retornaErro
+  retornaErro,
+  retornaLegendaTipo,
+  calcularTotal,
 };

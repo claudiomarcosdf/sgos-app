@@ -1,5 +1,7 @@
 import React from 'react';
+import Link from 'next/link';
 import {
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -55,7 +57,6 @@ function TabelaNotafiscal(props) {
 
   return (
     <>
-      {console.log(totalGeral)}
       <TableContainer>
         <Table size="small">
           <TableHead>
@@ -81,7 +82,16 @@ function TabelaNotafiscal(props) {
                   className={classes.root}
                 >
                   <TableCell component="th" scope="row">
-                    {row.numero}
+                    <Link
+                      href={{
+                        pathname: '/admin/itens-nf/[id]',
+                        query: { id: row.id },
+                      }}
+                    >
+                      <Button color="primary" size="small">
+                        <a>{row.numero}</a>
+                      </Button>
+                    </Link>
                   </TableCell>
                   <TableCell align="center">{dataNF}</TableCell>
                   <TableCell align="right">{tipo}</TableCell>

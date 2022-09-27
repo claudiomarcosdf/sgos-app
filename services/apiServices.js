@@ -41,6 +41,16 @@ async function getHistoricoManutencao(prefixo) {
   return response;
 }
 
+async function getItensNF(idNF) {
+  const response = await axios.get(`${API_URL}/itensnotafiscal/${idNF}`);
+
+  if (response.status !== 200) {
+    throw Error(response.Error);
+  }
+
+  return response;
+}
+
 async function getGraficoTotais() {
   const response = await axios.get(`${API_URL}/grafico/graficoTotais`);
 
@@ -69,4 +79,5 @@ export {
   getHistoricoManutencao,
   getGraficoTotais,
   getGraficoModeloEmManutencao,
+  getItensNF,
 };
