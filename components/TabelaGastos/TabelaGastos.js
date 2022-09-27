@@ -5,6 +5,7 @@ import CardHeader from 'components/Card/CardHeader.js';
 import CardBody from 'components/Card/CardBody.js';
 
 import { formatCurrency } from '../../helper/util';
+import { columnsCSV } from './fieldsToExport';
 
 import {
   Table,
@@ -16,6 +17,7 @@ import {
 } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
+import ExportExcel from 'components/ExportExcel/ExportExcel';
 
 const styles = {
   root: {
@@ -61,6 +63,10 @@ const styles = {
       lineHeight: '1',
     },
   },
+  headTable: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
 };
 
 const columns = [
@@ -78,7 +84,7 @@ function TabelaGastos(props) {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
 
-  const { rows } = props;
+  const { rows, prefixo } = props;
 
   const totalGeral = formatCurrency(
     rows.reduce((acc, curr) => acc + curr.total, 0),
@@ -89,12 +95,25 @@ function TabelaGastos(props) {
     <>
       <Card>
         <CardHeader color="dark">
-          <h4 className={classes.cardTitleWhite}>
-            Gastos com manutenções da viatura
-          </h4>
-          <p className={classes.cardCategoryWhite}>
-            Somatório de gastos por ordem de serviço
-          </p>
+          <div className={classes.headTable}>
+            <div>
+              <h4 className={classes.cardTitleWhite}>
+                Gastos com manutenções da viatura
+              </h4>
+              <p className={classes.cardCategoryWhite}>
+                Somatório de gastos por ordem de serviço
+              </p>
+            </div>
+            <div style={{ marginTop: '5px' }}>
+              {rows.length > 0 && (
+                <ExportExcel
+                  headers={columnsCSV}
+                  data={rows}
+                  fileName={`Gastos da viatura ${prefixo}`}
+                />
+              )}
+            </div>
+          </div>
         </CardHeader>
         <CardBody>
           {rows.length > 0 ? (

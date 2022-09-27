@@ -11,10 +11,9 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableFooter,
   TableHead,
   TablePagination,
-  TableRow
+  TableRow,
 } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -29,16 +28,16 @@ const styles = {
       minWidth: '5px',
       height: '5px',
       transform: 'rotate(-90deg)',
-      whiteSpace: 'nowrap'
-    }
+      whiteSpace: 'nowrap',
+    },
   },
   footer: {
     '& .MuiTableCell-footer': {
       color: '#1663BE', //'#574b90'
       opacity: 1,
       fontSize: '1.2em',
-      fontWeight: 500
-    }
+      fontWeight: 500,
+    },
   },
   cardCategoryWhite: {
     '&,& a,& a:hover,& a:focus': {
@@ -46,11 +45,11 @@ const styles = {
       margin: '0',
       fontSize: '14px',
       marginTop: '0',
-      marginBottom: '0'
+      marginBottom: '0',
     },
     '& a,& a:hover,& a:focus': {
-      color: '#FFFFFF'
-    }
+      color: '#FFFFFF',
+    },
   },
   cardTitleWhite: {
     color: '#FFFFFF',
@@ -64,74 +63,10 @@ const styles = {
       color: '#777',
       fontSize: '65%',
       fontWeight: '400',
-      lineHeight: '1'
-    }
-  }
+      lineHeight: '1',
+    },
+  },
 };
-
-// const columns = [
-//   { modelo: '', align: 'center' },
-//   { modelo: 'ASX' },
-//   { modelo: 'JOURNEY' },
-//   { modelo: 'COROLLA' },
-//   { modelo: 'PAJERO' },
-//   { modelo: 'ETIOS' },
-//   { modelo: 'KWID' }
-// ];
-
-// const rows = [
-//   {
-//     unidade: '1º BPM',
-//     modelo: 'ASX',
-//     total: 3
-//   },
-//   {
-//     unidade: '1º BPM',
-//     modelo: 'JOURNEY',
-//     total: 7
-//   },
-//   {
-//     unidade: '1º BPM',
-//     modelo: 'COROLLA',
-//     total: 10
-//   },
-//   {
-//     unidade: '1º BPM',
-//     modelo: 'PAJERO',
-//     total: 1
-//   },
-//   {
-//     unidade: '8º BPM',
-//     modelo: 'ASX',
-//     total: 1
-//   },
-//   {
-//     unidade: '8º BPM',
-//     modelo: 'JOURNEY',
-//     total: 13
-//   },
-//   {
-//     unidade: '8º BPM',
-//     modelo: 'COROLLA',
-//     total: 5
-//   }
-// ];
-
-// const resultado = groupBy(rows, 'unidade');
-// const withNestedKeys = Object.entries(resultado).map((entry) => {
-//   return { [entry[0]]: entry[1] };
-// });
-
-/*
-  [
-    1º BPM : [{unidade: '1º BPM', modelo: 'Y', total: 3}],
-    8º BPM : [{unidade: '8º BPM', modelo: 'Y', total: 3}]
-
-  ]
-
-*/
-
-//console.log(withNestedKeys);
 
 const cabecalhoVazio = [1, 2, 3, 4];
 
@@ -162,29 +97,29 @@ function TabelaManutencoes(props) {
     const rangers = {
       lower: 3,
       medium: 5,
-      righ: 7
+      righ: 7,
     };
 
     const styleDefault = {
-      color: '#2f3542'
+      color: '#2f3542',
     };
     const styleLower = {
       backgroundColor: '#d2f8d2',
       color: '#006266',
       padding: '1px 6px',
-      borderRadius: '3px'
+      borderRadius: '3px',
     };
     const styleMedium = {
       backgroundColor: '#f7d794',
       color: '#d35400',
       padding: '1px 6px',
-      borderRadius: '3px'
+      borderRadius: '3px',
     };
     const styleRigh = {
       backgroundColor: '#fab1a0',
       color: '#EA2027',
       padding: '1px 6px',
-      borderRadius: '3px'
+      borderRadius: '3px',
     };
 
     if (total >= rangers.lower && total < rangers.medium) {
@@ -242,7 +177,7 @@ function TabelaManutencoes(props) {
   return (
     <>
       <Card>
-        <CardHeader color='dark'>
+        <CardHeader color="dark">
           <h4 className={classes.cardTitleWhite}>
             Mapa de viaturas em manutenção
           </h4>
@@ -301,12 +236,18 @@ function TabelaManutencoes(props) {
           </TableContainer>
           <TablePagination
             rowsPerPageOptions={[9, 15, 20]}
-            component='div'
+            component="div"
             count={withNestedKeys.length}
+            labelRowsPerPage={'Linhas por página'}
             rowsPerPage={rowsPerPage}
+            labelDisplayedRows={({ from, to, count }) =>
+              `${from}-${to} de ${count}`
+            }
             page={page}
             onChangePage={handleChangePage}
             onChangeRowsPerPage={handleChangeRowsPerPage}
+            backIconButtonText={'Anterior'}
+            nextIconButtonText={'Próxima'}
           />
         </CardBody>
       </Card>

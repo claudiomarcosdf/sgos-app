@@ -85,7 +85,7 @@ function GastosViatura() {
       </GridItem>
 
       <GridItem xs={12} sm={12} md={12}>
-        <TabelaGastos rows={data} />
+        <TabelaGastos rows={data} prefixo={viatura?.prefixo} />
       </GridItem>
     </GridContainer>
   );
