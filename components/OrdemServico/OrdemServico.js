@@ -341,9 +341,10 @@ function OrdemServico() {
                         getAriaValueText={valuetext}
                         aria-labelledby="combustivel"
                         step={10}
-                        valueLabelDisplay="auto"
+                        valueLabelDisplay="off"
                         marks={marks}
                         style={{ color: '#f55a4e' }}
+                        disabled
                       />
                     </Box>
                   </GridItem>
