@@ -97,7 +97,7 @@ function Dashboard() {
         <GridItem xs={12} sm={12} md={4}>
           <Card>
             <CardHeader color='danger' stats icon>
-              <CardIcon color='danger'>
+              <CardIcon color='danger'> 
                 <BuildIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Em manutenção</p>
