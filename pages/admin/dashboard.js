@@ -3,7 +3,10 @@ import React from 'react';
 import ChartistGraph from 'react-chartist';
 // @material-ui/core
 import { makeStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
+import BuildIcon from '@material-ui/icons/Build';
+import IconBaixas from '@material-ui/icons/LayersClear';
+import IconAltas from '@material-ui/icons/Layers';
+
 // @material-ui/icons
 import Store from '@material-ui/icons/Store';
 import Warning from '@material-ui/icons/Warning';
@@ -93,9 +96,9 @@ function Dashboard() {
       <GridContainer>
         <GridItem xs={12} sm={12} md={4}>
           <Card>
-            <CardHeader color='warning' stats icon>
-              <CardIcon color='warning'>
-                <Icon>content_copy</Icon>
+            <CardHeader color='danger' stats icon>
+              <CardIcon color='danger'>
+                <BuildIcon />
               </CardIcon>
               <p className={classes.cardCategory}>Em manutenção</p>
               <h3 className={classes.cardTitle}>
@@ -115,9 +118,9 @@ function Dashboard() {
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
           <Card>
-            <CardHeader color='dark' stats icon>
-              <CardIcon color='dark'>
-                <Store />
+            <CardHeader color='warning' stats icon>
+              <CardIcon color='warning'>
+                <IconBaixas />
               </CardIcon>
               <p className={classes.cardCategory}>Baixas de hoje</p>
               <h3 className={classes.cardTitle}>{totais.baixasHoje || 0}</h3>
@@ -133,8 +136,8 @@ function Dashboard() {
         <GridItem xs={12} sm={12} md={4}>
           <Card>
             <CardHeader color='danger' stats icon>
-              <CardIcon color='danger'>
-                <Icon>info_outline</Icon>
+              <CardIcon color='success'>
+                <IconAltas />
               </CardIcon>
               <p className={classes.cardCategory}>Altas de hoje</p>
               <h3 className={classes.cardTitle}>{totais.altasHoje || 0}</h3>

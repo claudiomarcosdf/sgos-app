@@ -19,11 +19,11 @@ function ExportExcel({ headers, data, fileName }) {
   // ];
 
   return (
-    <RegularButton color="success" size="sm" startIcon={<GetAppIcon />}>
+    <RegularButton color='success' size='sm' startIcon={<GetAppIcon />}>
       <CSVLink
         headers={headers}
         data={data}
-        target="_blank"
+        target='_blank'
         separator={';'}
         filename={`${fileName}.csv`}
         style={{ color: 'white' }}

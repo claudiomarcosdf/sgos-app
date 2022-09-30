@@ -13,7 +13,7 @@ import {
   TableCell,
   TableFooter,
   TableHead,
-  TableRow,
+  TableRow
 } from '@material-ui/core';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,16 +25,16 @@ const styles = {
       color: '#1663BE', //'#ab47bc'
       opacity: 1,
       fontSize: '1em',
-      fontWeight: 300,
+      fontWeight: 300
       //transform: 'rotate(-90deg)'
-    },
+    }
   },
   footer: {
     '& .MuiTableCell-footer': {
       color: '#1663BE', //'#574b90'
       fontSize: '1.2em',
-      fontWeight: 500,
-    },
+      fontWeight: 500
+    }
   },
   cardCategoryWhite: {
     '&,& a,& a:hover,& a:focus': {
@@ -42,11 +42,11 @@ const styles = {
       margin: '0',
       fontSize: '14px',
       marginTop: '0',
-      marginBottom: '0',
+      marginBottom: '0'
     },
     '& a,& a:hover,& a:focus': {
-      color: '#FFFFFF',
-    },
+      color: '#FFFFFF'
+    }
   },
   cardTitleWhite: {
     color: '#FFFFFF',
@@ -60,13 +60,13 @@ const styles = {
       color: '#777',
       fontSize: '65%',
       fontWeight: '400',
-      lineHeight: '1',
-    },
+      lineHeight: '1'
+    }
   },
   headTable: {
     display: 'flex',
-    justifyContent: 'space-between',
-  },
+    justifyContent: 'space-between'
+  }
 };
 
 const columns = [
@@ -77,7 +77,7 @@ const columns = [
   { name: 'Corretiva' },
   { name: 'Cancelada' },
   { name: 'Retorno' },
-  { name: 'Total R$', align: 'right' },
+  { name: 'Total R$', align: 'right' }
 ];
 
 function TabelaGastos(props) {
@@ -94,7 +94,7 @@ function TabelaGastos(props) {
   return (
     <>
       <Card>
-        <CardHeader color="dark">
+        <CardHeader color='dark'>
           <div className={classes.headTable}>
             <div>
               <h4 className={classes.cardTitleWhite}>
@@ -120,10 +120,10 @@ function TabelaGastos(props) {
             <Table>
               <TableHead>
                 <TableRow className={classes.root}>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align='center' colSpan={3}>
                     Dados da O.S
                   </TableCell>
-                  <TableCell align="center" colSpan={5}>
+                  <TableCell align='center' colSpan={5}>
                     Detalhes da manutenção
                   </TableCell>
                 </TableRow>
@@ -143,7 +143,7 @@ function TabelaGastos(props) {
                   const colCanceladaColor =
                     row.cancelada == 'Sim'
                       ? {
-                          color: '#ff5e57',
+                          color: '#ff5e57'
                         }
                       : {};
 
@@ -151,28 +151,28 @@ function TabelaGastos(props) {
                     <TableRow hover key={i}>
                       <TableCell>{row.os}</TableCell>
 
-                      <TableCell align="center">{row.data}</TableCell>
+                      <TableCell align='center'>{row.data}</TableCell>
 
-                      <TableCell align="center">{row.executor}</TableCell>
+                      <TableCell align='center'>{row.executor}</TableCell>
 
-                      <TableCell align="center">{row.preventiva}</TableCell>
+                      <TableCell align='center'>{row.preventiva}</TableCell>
 
-                      <TableCell align="center">{row.corretiva}</TableCell>
+                      <TableCell align='center'>{row.corretiva}</TableCell>
 
-                      <TableCell align="center" style={colCanceladaColor}>
+                      <TableCell align='center' style={colCanceladaColor}>
                         {row.cancelada}
                       </TableCell>
 
-                      <TableCell align="center">{row.retorno}</TableCell>
+                      <TableCell align='center'>{row.retorno}</TableCell>
 
-                      <TableCell align="right">{row.totalFormatado}</TableCell>
+                      <TableCell align='right'>{row.totalFormatado}</TableCell>
                     </TableRow>
                   );
                 })}
               </TableBody>
               <TableFooter className={classes.footer}>
                 <TableRow>
-                  <TableCell align="right" colSpan={8}>
+                  <TableCell align='right' colSpan={8}>
                     Total geral: {totalGeral}
                   </TableCell>
                 </TableRow>
